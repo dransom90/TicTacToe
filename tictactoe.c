@@ -28,6 +28,7 @@ static int markers[9] = {0};
 static int turn = 0;
 static int winner = 0;
 
+
 void DrawThickBar(SDL_Renderer* renderer, float cx, float cy, float len, float thickness, float angle) {
     float halfLen = len / 2.0f;
     float halfThick = thickness / 2.0f;

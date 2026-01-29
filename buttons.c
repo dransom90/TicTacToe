@@ -43,15 +43,15 @@ void RenderButtons(SDL_Renderer* renderer)
     {
         if(buttons[i].isPressed)
         {
-            SDL_SetRenderDrawColor(renderer, 100, 100, 100, 255);
+            SDL_SetRenderDrawColor(renderer, 0, 123, 255, 255);
         }
         else if(buttons[i].isHovered)
         {
-            SDL_SetRenderDrawColor(renderer, 200, 200, 200, 255);
+            SDL_SetRenderDrawColor(renderer, 0, 105, 217, 255);
         }
         else
         {
-            SDL_SetRenderDrawColor(renderer, 150, 150, 150, 255);
+            SDL_SetRenderDrawColor(renderer, 0, 86, 179, 255);
         }
 
         SDL_RenderFillRect(renderer, &buttons[i].rect);

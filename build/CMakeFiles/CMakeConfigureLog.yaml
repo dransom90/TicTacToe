@@ -2518,3 +2518,506 @@ events:
         - "C:/msys64/ucrt64"
         - "C:/Program Files (x86)/hello"
 ...
+
+---
+events:
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:5 (find_pacKage)"
+    name: "SDL3_ttf"
+    configs:
+      -
+        filename: "SDL3_ttfConfig.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3_ttf-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3_ttf"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/pkgRedirects/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/pkgRedirects/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Microsoft/WindowsApps/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Microsoft/WindowsApps/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Microsoft VS Code/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Microsoft VS Code/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft Office/root/Office16/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft Office/root/Office16/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Git/cmd/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Git/cmd/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/msys64/ucrt64/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/msys64/ucrt64/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/SDL3_ttfConfig.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files (x86)/sdl3_ttf-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+    found: null
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\Microsoft Office\\root\\Office16"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Programs\\Git\\cmd"
+        - "C:\\msys64\\ucrt64\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/hello"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files (x86)/hello"
+...
+
+---
+events:
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:7 (find_package)"
+    name: "SDL3"
+    configs:
+      -
+        filename: "SDL3Config.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/sdl/SDL3Config.cmake"
+        mode: "none?"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/sdl/sdl3-config.cmake"
+        mode: "none?"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/pkgRedirects/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/pkgRedirects/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Microsoft/WindowsApps/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Microsoft/WindowsApps/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Microsoft VS Code/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Microsoft VS Code/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft Office/root/Office16/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft Office/root/Office16/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Git/cmd/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Git/cmd/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/msys64/ucrt64/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/msys64/ucrt64/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+    found:
+      path: "C:/msys64/ucrt64/lib/cmake/SDL3/SDL3Config.cmake"
+      mode: "config"
+      version: "3.2.20"
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\Microsoft Office\\root\\Office16"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Programs\\Git\\cmd"
+        - "C:\\msys64\\ucrt64\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/hello"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files (x86)/hello"
+...
+
+---
+events:
+  -
+    kind: "find_package-v1"
+    backtrace:
+      - "CMakeLists.txt:7 (find_package)"
+    name: "SDL3"
+    configs:
+      -
+        filename: "SDL3Config.cmake"
+        kind: "cmake"
+      -
+        filename: "sdl3-config.cmake"
+        kind: "cmake"
+    version_request:
+      exact: false
+    settings:
+      required: "required_explicit"
+      quiet: false
+      global: false
+      policy_scope: true
+      bypass_provider: false
+      names:
+        - "SDL3"
+      path_suffixes:
+        - ""
+      paths:
+        CMAKE_FIND_USE_CMAKE_PATH: true
+        CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+        CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+        CMAKE_FIND_USE_INSTALL_PREFIX: true
+        CMAKE_FIND_USE_PACKAGE_ROOT_PATH: true
+        CMAKE_FIND_USE_CMAKE_PACKAGE_REGISTRY: true
+        CMAKE_FIND_USE_SYSTEM_PACKAGE_REGISTRY: true
+        CMAKE_FIND_ROOT_PATH_MODE: "BOTH"
+    candidates:
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/sdl/lib/cmake/SDL3/SDL3Config.cmake"
+        mode: "none?"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/sdl/lib/cmake/SDL3/sdl3-config.cmake"
+        mode: "none?"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/pkgRedirects/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/pkgRedirects/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/wbem/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/WindowsPowerShell/v1.0/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Windows/System32/OpenSSH/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/dotnet/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Microsoft/WindowsApps/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Microsoft/WindowsApps/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Microsoft VS Code/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Microsoft VS Code/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft Office/root/Office16/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Program Files/Microsoft Office/root/Office16/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Git/cmd/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/Users/RegularUser(Change)/AppData/Local/Programs/Git/cmd/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/msys64/ucrt64/SDL3Config.cmake"
+        mode: "config"
+        reason: "no_exist"
+      -
+        path: "C:/msys64/ucrt64/sdl3-config.cmake"
+        mode: "config"
+        reason: "no_exist"
+    found:
+      path: "C:/msys64/ucrt64/lib/cmake/SDL3/SDL3Config.cmake"
+      mode: "config"
+      version: "3.2.20"
+    search_context:
+      ENV{PATH}:
+        - "C:\\WINDOWS\\system32"
+        - "C:\\WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Microsoft\\WindowsApps"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+        - "C:\\Program Files\\Microsoft Office\\root\\Office16"
+        - "C:\\Users\\RegularUser(Change)\\AppData\\Local\\Programs\\Git\\cmd"
+        - "C:\\msys64\\ucrt64\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/hello"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files (x86)/hello"
+...
