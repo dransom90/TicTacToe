@@ -1,0 +1,15 @@
+# ninja log v7
+18	103	7913225177240081	CMakeFiles/hello.dir/hello.c.obj	aec508f0f37f895
+104	202	7913225178110361	hello.exe	9382a21e19f4a0ac
+16	113	7914130371676099	CMakeFiles/tictactoe.dir/tictactoe.c.obj	3f564c61d3999cc
+107	190	7914166803931670	tictactoe.exe	895a4edc70b973e3
+21	107	7914166803007800	CMakeFiles/tictactoe.dir/buttons.c.obj	94ca2353ce175e3b
+2	84	7914169760357297	CMakeFiles/tictactoe.dir/buttons.c.obj	94ca2353ce175e3b
+85	156	7914169761170954	tictactoe.exe	895a4edc70b973e3
+20	106	7914170885086812	CMakeFiles/tictactoe.dir/buttons.c.obj	94ca2353ce175e3b
+107	200	7914170885951371	tictactoe.exe	895a4edc70b973e3
+23	101	7914174546311442	CMakeFiles/tictactoe.dir/buttons.c.obj	94ca2353ce175e3b
+21	120	7914174546291234	CMakeFiles/tictactoe.dir/tictactoe.c.obj	3f564c61d3999cc
+120	190	7914174547280499	tictactoe.exe	895a4edc70b973e3
+23	124	7914179752791925	CMakeFiles/tictactoe.dir/tictactoe.c.obj	3f564c61d3999cc
+124	186	7914179753804781	tictactoe.exe	895a4edc70b973e3
