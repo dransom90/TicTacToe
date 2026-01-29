@@ -272,38 +272,13 @@ bool checkLine(int a, int b, int c)
 /* This function runs once per frame, and is the heart of the program. */
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
-    // Draw buttons
-    RenderButtons(renderer);
-
-    // Draw game board
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);  /* black, full alpha */
-    SDL_RenderFillRect(renderer, &background);
-
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
-    for(int i = 0; i < 9; i++)
-    {
-        SDL_RenderFillRect(renderer, &rects[i]);
+    if (winner > 0) {
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Black for Game Over
+    } else {
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // White for Gameplay
     }
-
-    // Draw markers
-    int marker;
-    for(int i = 0; i < 9; i++)
-    {
-        SDL_FRect rect = rects[i];
-        if(markers[i] == 1)
-        {
-            //Place an X
-            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-            DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, 45.0f);
-            DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, -45.0f);
-        }
-        else if(markers[i] == 2)
-        {
-            // Place an O
-            SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-            DrawBoldO(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, (rect.w / 2.0f) * 0.8f, 12.0f);
-        }
-    }
+    SDL_RenderClear(renderer);
+    SDL_SetRenderScale(renderer, 1.0f, 1.0f);
 
     if(winner > 0)
     {
@@ -333,15 +308,47 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
 
         /* Draw the message */
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
         SDL_RenderDebugText(renderer, x, y, message);
-        SDL_RenderPresent(renderer);
+        SDL_SetRenderScale(renderer, 1.0f, 1.0f);
     }
-    
-    SDL_RenderPresent(renderer);
+    else
+    {
+        // Draw game board
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);  /* black, full alpha */
+        SDL_RenderFillRect(renderer, &background);
 
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
+        for(int i = 0; i < 9; i++)
+        {
+            SDL_RenderFillRect(renderer, &rects[i]);
+        }
+
+        // Draw markers
+        int marker;
+        for(int i = 0; i < 9; i++)
+        {
+            SDL_FRect rect = rects[i];
+            if(markers[i] == 1)
+            {
+                //Place an X
+                SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+                DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, 45.0f);
+                DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, -45.0f);
+            }
+            else if(markers[i] == 2)
+            {
+                // Place an O
+                SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+                DrawBoldO(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, (rect.w / 2.0f) * 0.8f, 12.0f);
+            }
+        }
+    }
+
+    // Draw buttons
+    RenderButtons(renderer);
+    SDL_RenderPresent(renderer);
+    
     return SDL_APP_CONTINUE;
 }
 
