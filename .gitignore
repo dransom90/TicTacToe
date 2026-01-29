@@ -1,0 +1,65 @@
+# User-specific configuration files
+CMakeLists.txt.user
+CMakeUserPresets.json
+CMakeCache.txt
+
+# Directories
+CMakeFiles/
+_deps/
+
+# Build artifacts (out-of-source build is recommended)
+# You can customize this to match your build directory name (e.g., 'build/', 'out/', 'cmake-build-*')
+build/
+out/
+cmake-build-*/
+
+# Specific generated files
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+# Config files
+*Targets.cmake
+*Config.cmake
+*ConfigVersion.cmake
+# Executables, libraries, object files, etc.
+*.exe
+*.dll
+*.so
+*.a
+*.lib
+*.obj
+*.o
+Makefile
+*.ninja
+.ninja_*
+
+# SDL-specific temporary files/artifacts (optional, primarily for SDL library development itself)
+/VERSION.txt
+__pycache__
+*.dSYM
+*.lnk
+*.err
+*.exp
+*.map
+*.orig
+*~
+*.swp
+*.tmp
+*.rej
+# for Xcode
+*.mode1*
+*.perspective*
+*.pbxuser
+xcuserdata
+*.xcworkspace
+Xcode/build.xcconfig
+# for Visual Studio Code
+.vscode/
+# for Visual C++
+.vs
+Debug
+Release
+*.suo
+*.ncb
+*.sdf
