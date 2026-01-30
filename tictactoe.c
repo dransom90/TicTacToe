@@ -28,6 +28,8 @@ static int markers[9] = {0};
 static int turn = 0;
 static int winner = 0;
 
+float LOGICAL_W, LOGICAL_H;
+
 
 void DrawThickBar(SDL_Renderer* renderer, float cx, float cy, float len, float thickness, float angle) {
     float halfLen = len / 2.0f;
@@ -109,18 +111,15 @@ void createRects()
 {
     float cellSize = 100.0f;
     float spacing = 10.0f;
-    int winW, winH;
     int rectCount = 0;
-
-    SDL_GetWindowSize(window, &winW, &winH);
 
     // Calculate total footprint of the 3x3 grid
     float totalGridWidth = (cellSize * 3) + (spacing * 2);
     float totalGridHeight = (cellSize * 3) + (spacing * 2);
 
     // Find the starting top-left corner to keep it centered
-    float startX = (winW - totalGridWidth) / 2.0f;
-    float startY = (winH - totalGridHeight) / 2.0f;
+    float startX = (LOGICAL_W - totalGridWidth) / 2.0f;
+    float startY = (LOGICAL_H - totalGridHeight) / 2.0f;
 
     background.w = totalGridWidth;
     background.h = totalGridHeight;
@@ -140,20 +139,6 @@ void createRects()
             rects[rectCount++] = rect;
         }
     }
-}
-
-/* This function runs once at startup. */
-SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
-{
-    /* Create the window */
-    if (!SDL_CreateWindowAndRenderer("Tic Tac Toe", 400, 300, SDL_WINDOW_FULLSCREEN, &window, &renderer)) {
-        SDL_Log("Couldn't create window and renderer: %s", SDL_GetError());
-        return SDL_APP_FAILURE;
-    }
-
-    createRects();
-    CreateButtons(window);
-    return SDL_APP_CONTINUE;
 }
 
 int checkForTie()
@@ -205,9 +190,40 @@ SDL_AppResult HandleButtnEventResult(ButtonEvent btnEvent)
     
 }
 
+/* This function runs once at startup. */
+SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
+{
+    SDL_Init(SDL_INIT_VIDEO);
+    int num_displays;
+    SDL_DisplayID* displays = SDL_GetDisplays(&num_displays);
+    if(!displays) return -1;
+    SDL_DisplayID primary = displays[0];
+
+    SDL_Rect bounds;
+    SDL_GetDisplayUsableBounds(primary, &bounds);
+
+    float width = bounds.w / 2;
+    float height = bounds.h / 2;
+    LOGICAL_W = bounds.w / 2;
+    LOGICAL_H = bounds.h / 2;
+
+    /* Create the window */
+    if (!SDL_CreateWindowAndRenderer("Tic Tac Toe", width, height, SDL_WINDOW_MAXIMIZED, &window, &renderer)) {
+        SDL_Log("Couldn't create window and renderer: %s", SDL_GetError());
+        return SDL_APP_FAILURE;
+    }
+
+    SDL_SetRenderLogicalPresentation(renderer, (int)LOGICAL_W, (int)LOGICAL_H, SDL_SCALEMODE_LINEAR);
+
+    createRects();
+    CreateButtons(window);
+    return SDL_APP_CONTINUE;
+}
+
 /* This function runs when a new event (mouse input, keypresses, etc) occurs. */
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {    
+    SDL_ConvertEventToRenderCoordinates(renderer, event);
     ButtonEvent btnEvent = HandleButtonEvent(event);
     if(HandleButtnEventResult(btnEvent) == SDL_APP_SUCCESS)
         return SDL_APP_SUCCESS;
@@ -273,11 +289,7 @@ bool checkLine(int a, int b, int c)
 /* This function runs once per frame, and is the heart of the program. */
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
-    if (winner > 0) {
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Black for Game Over
-    } else {
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // White for Gameplay
-    }
+    SDL_SetRenderDrawColor(renderer, 46, 52, 64, 255);
     SDL_RenderClear(renderer);
     SDL_SetRenderScale(renderer, 1.0f, 1.0f);
 
@@ -309,7 +321,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
 
         /* Draw the message */
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         SDL_RenderDebugText(renderer, x, y, message);
         SDL_SetRenderScale(renderer, 1.0f, 1.0f);
     }
@@ -319,7 +331,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);  /* black, full alpha */
         SDL_RenderFillRect(renderer, &background);
 
-        SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);  /* white, full alpha */
+        SDL_SetRenderDrawColor(renderer, 46, 52, 64, SDL_ALPHA_OPAQUE);  /* white, full alpha */
         for(int i = 0; i < 9; i++)
         {
             SDL_RenderFillRect(renderer, &rects[i]);
