@@ -3,7 +3,7 @@ project(tictactoe)
 
 find_package(SDL3 REQUIRED)
 
-add_executable(tictactoe src/tictactoe.c src/buttons.c)
+add_executable(tictactoe src/tictactoe.c src/buttons.c src/gameboard.c src/logic.c src/scoreboard.c)
 
 target_include_directories(tictactoe PRIVATE 
                             ${CMAKE_CURRENT_SOURCE_DIR}/include
