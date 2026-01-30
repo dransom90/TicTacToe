@@ -258,10 +258,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
     }
 
      if (event->type == SDL_EVENT_QUIT) {
-        return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
-    // if (event->type == SDL_EVENT_KEY_DOWN ||
-    //     event->type == SDL_EVENT_QUIT) {
-    //     return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
+        return SDL_APP_SUCCESS;
     }
     return SDL_APP_CONTINUE;
 }
@@ -286,16 +283,26 @@ bool checkLine(int a, int b, int c)
     return (a != 0 && a == b && b == c);
 }
 
-/* This function runs once per frame, and is the heart of the program. */
-SDL_AppResult SDL_AppIterate(void *appstate)
+void ShowGameOverMessage(const char *message)
 {
-    SDL_SetRenderDrawColor(renderer, 46, 52, 64, 255);
-    SDL_RenderClear(renderer);
-    SDL_SetRenderScale(renderer, 1.0f, 1.0f);
+    int w = 0, h = 0;
+    const float scale = 4.0f;
 
-    if(winner > 0)
-    {
-        const char *message = " ";
+    /* Center the message and scale it up */
+    SDL_GetRenderOutputSize(renderer, &w, &h);
+    SDL_SetRenderScale(renderer, scale, scale);
+    int x = ((w / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(message)) / 2;
+    int y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
+
+    /* Draw the message */
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderDebugText(renderer, x, y, message);
+    SDL_SetRenderScale(renderer, 1.0f, 1.0f);
+}
+
+void ShowGameOverState()
+{
+    const char *message = " ";
         switch(winner)
         {
             case 1:
@@ -310,53 +317,54 @@ SDL_AppResult SDL_AppIterate(void *appstate)
             default:
                 break;
         }
-        int w = 0, h = 0;
-        float x, y;
-        const float scale = 4.0f;
+    
+    ShowGameOverMessage(message);
+}
 
-        /* Center the message and scale it up */
-        SDL_GetRenderOutputSize(renderer, &w, &h);
-        SDL_SetRenderScale(renderer, scale, scale);
-        x = ((w / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(message)) / 2;
-        y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 2;
-
-        /* Draw the message */
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderDebugText(renderer, x, y, message);
-        SDL_SetRenderScale(renderer, 1.0f, 1.0f);
-    }
-    else
+void DrawGameMarkers()
+{
+    for(int i = 0; i < 9; i++)
     {
-        // Draw game board
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);  /* black, full alpha */
-        SDL_RenderFillRect(renderer, &background);
-
-        SDL_SetRenderDrawColor(renderer, 46, 52, 64, SDL_ALPHA_OPAQUE);  /* white, full alpha */
-        for(int i = 0; i < 9; i++)
+        SDL_FRect rect = rects[i];
+        if(markers[i] == 1)
         {
-            SDL_RenderFillRect(renderer, &rects[i]);
+            //Place an X
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+            DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, 45.0f);
+            DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, -45.0f);
         }
-
-        // Draw markers
-        int marker;
-        for(int i = 0; i < 9; i++)
+        else if(markers[i] == 2)
         {
-            SDL_FRect rect = rects[i];
-            if(markers[i] == 1)
-            {
-                //Place an X
-                SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-                DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, 45.0f);
-                DrawThickBar(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, rect.w * 0.9f, 12.0f, -45.0f);
-            }
-            else if(markers[i] == 2)
-            {
-                // Place an O
-                SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-                DrawBoldO(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, (rect.w / 2.0f) * 0.8f, 12.0f);
-            }
+            // Place an O
+            SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+            DrawBoldO(renderer, rect.x + rect.w / 2.0f, rect.y + rect.h / 2.0f, (rect.w / 2.0f) * 0.8f, 12.0f);
         }
     }
+}
+
+void ShowGameBoard()
+{
+    // Draw game board
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);  /* black, full alpha */
+    SDL_RenderFillRect(renderer, &background);
+
+    SDL_SetRenderDrawColor(renderer, 46, 52, 64, SDL_ALPHA_OPAQUE);  /* white, full alpha */
+    for(int i = 0; i < 9; i++)
+    {
+        SDL_RenderFillRect(renderer, &rects[i]);
+    }
+
+    DrawGameMarkers();
+}
+
+/* This function runs once per frame, and is the heart of the program. */
+SDL_AppResult SDL_AppIterate(void *appstate)
+{
+    SDL_SetRenderDrawColor(renderer, 46, 52, 64, 255);
+    SDL_RenderClear(renderer);
+    SDL_SetRenderScale(renderer, 1.0f, 1.0f);
+
+    winner > 0 ? ShowGameOverState() : ShowGameBoard();
 
     // Draw buttons
     RenderButtons(renderer);

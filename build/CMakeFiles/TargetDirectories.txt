@@ -1,3 +1,0 @@
-C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/tictactoe.dir
-C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/edit_cache.dir
-C:/Users/RegularUser(Change)/DJRansom/projects/sdl/build/CMakeFiles/rebuild_cache.dir
