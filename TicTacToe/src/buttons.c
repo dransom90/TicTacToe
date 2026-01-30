@@ -2,6 +2,7 @@
 #include <SDL3/SDL_rect.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include <buttons.h>
 
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
@@ -71,11 +72,28 @@ ButtonEvent HandleButtonEvent(SDL_Event* event)
 {
     ButtonEvent btnEvent = {false, false, false};
 
+    if (event->type == SDL_EVENT_WINDOW_MOUSE_LEAVE || event->type == SDL_EVENT_WINDOW_FOCUS_LOST) {
+        for(int i = 0; i < NELEMS(buttons); i++) {
+            buttons[i].isHovered = false;
+            buttons[i].isPressed = false;
+        }
+    }
+
     if(event->type == SDL_EVENT_MOUSE_MOTION || event->type == SDL_EVENT_MOUSE_BUTTON_DOWN ||
         event->type == SDL_EVENT_MOUSE_BUTTON_UP)
     {
             float mX, mY;
-            SDL_FPoint mousePos = {event->button.x, event->button.y};
+            SDL_FPoint mousePos;
+            if (event->type == SDL_EVENT_MOUSE_MOTION) 
+            {
+                mousePos.x = event->motion.x;
+                mousePos.y = event->motion.y;
+            } 
+            else 
+            {
+                mousePos.x = event->button.x;
+                mousePos.y = event->button.y;
+            }
             
             for(int i = 0; i < NELEMS(buttons); i++)
             {
@@ -83,28 +101,29 @@ ButtonEvent HandleButtonEvent(SDL_Event* event)
 
                 btn->isHovered = SDL_PointInRectFloat(&mousePos, &btn->rect);
 
-                if(btn->isHovered && event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button == SDL_BUTTON_LEFT)
+                if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button == SDL_BUTTON_LEFT) 
                 {
-                    btn->isPressed = true;
+                    if (btn->isHovered) btn->isPressed = true;
                 }
 
-                if(event->type == SDL_EVENT_MOUSE_BUTTON_UP)
+                if(event->type == SDL_EVENT_MOUSE_BUTTON_UP && event->button.button == SDL_BUTTON_LEFT)
                 {
                     if(btn->isPressed && btn->isHovered)
                     {
-                        if(btn->label == "NEW GAME")
+                        if (SDL_strcmp(btn->label, "NEW GAME") == 0)
                         {
+                            printf("New Game press detected\n");
                             btnEvent.newGame = true;
+                            btn->isPressed = false;
                             return btnEvent;
                         }
-                        if(btn->label == "QUIT")
+                        if (SDL_strcmp(btn->label, "QUIT") == 0)
                         {
                             btnEvent.quit = true;
+                            btn->isPressed = false;
                             return btnEvent;
-                        }
-                        // Handle Button Clicked Logic
-                        // How do I clear the game state from this file?
-                        // return a struct of results and let the calling function handle it?
+                        } 
+                            
                     }
 
                     btn->isPressed = false;

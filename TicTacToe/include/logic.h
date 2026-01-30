@@ -21,5 +21,6 @@ void CheckForWinner();
 void EndCurrentTurn();
 void Reset();
 GameResult GetGameResult();
+void UpdateScoreboard();
 
 #endif

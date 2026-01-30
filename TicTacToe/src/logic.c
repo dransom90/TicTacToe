@@ -1,8 +1,12 @@
 #include <logic.h>
 #include <gameboard.h>
+#include <scoreboard.h>
+#include <stdbool.h>
+#include <stdio.h>
 
 int turn = 0;
 GameResult result = { NONE };
+bool scoreboardUpdated = false;
 
 const int WIN_STATES[8][3] = {
     {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Rows
@@ -22,7 +26,6 @@ int CheckForTie()
 }
 
 /// @brief Check for a winner
-/// @return 0 if no winner/game in progress, 1 if X wins, 2 if O wins, 3 if it's a tie
 void CheckForWinner()
 {
     for (int i = 0; i < 8; i++) {
@@ -53,11 +56,24 @@ void EndCurrentTurn()
 
 void Reset()
 {
+    printf("Resetting logic\n");
     turn = 0;
     result.type = NONE;
+    scoreboardUpdated = true;
 }
 
 GameResult GetGameResult()
 {
     return result;
+}
+
+void UpdateScoreboard()
+{
+    printf("Entering UpdateScoreboard\n");
+    if(result.type == NONE || scoreboardUpdated)
+        return;
+
+    printf("Calling AddResult\n");
+    AddResult(result);
+    scoreboardUpdated = true;
 }

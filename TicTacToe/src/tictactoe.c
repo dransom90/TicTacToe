@@ -84,6 +84,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
         }
 
         CheckForWinner();
+        UpdateScoreboard();
     }
 
      if (event->type == SDL_EVENT_QUIT) {
