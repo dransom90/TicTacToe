@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 int turn = 0;
-GameResult result = { NONE };
+static GameResult result = { NONE };
 bool scoreboardUpdated = false;
 
 const int WIN_STATES[8][3] = {
@@ -36,7 +36,7 @@ void CheckForWinner()
         // Check if all three are the same and not empty (0)
         if (markers[a] != 0 && markers[a] == markers[b] && markers[a] == markers[c]) {
             result.type = (markers[a] == 1) ? X : O;
-            return;
+                return;
         }
     }
 
@@ -56,24 +56,24 @@ void EndCurrentTurn()
 
 void Reset()
 {
-    printf("Resetting logic\n");
+    //printf("Resetting logic\n");
     turn = 0;
     result.type = NONE;
     scoreboardUpdated = true;
 }
 
-GameResult GetGameResult()
+GameResult* GetGameResult(void)
 {
-    return result;
+    return &result;
 }
 
 void UpdateScoreboard()
 {
-    printf("Entering UpdateScoreboard\n");
+    //printf("Entering UpdateScoreboard\n");
     if(result.type == NONE || scoreboardUpdated)
         return;
 
-    printf("Calling AddResult\n");
+    //printf("Calling AddResult\n");
     AddResult(result);
     scoreboardUpdated = true;
 }

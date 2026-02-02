@@ -20,7 +20,7 @@ typedef struct
 void CheckForWinner();
 void EndCurrentTurn();
 void Reset();
-GameResult GetGameResult();
+GameResult* GetGameResult();
 void UpdateScoreboard();
 
 #endif

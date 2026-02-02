@@ -17,6 +17,7 @@ float LOGICAL_W, LOGICAL_H;
 
 SDL_AppResult HandleButtnEventResult(ButtonEvent *btnEvent)
 {
+    //printf("HandleButtonEventResult: newGame: %d, quit: %d, noAction: %d\n", btnEvent->newGame, btnEvent->quit, btnEvent->noAction);
     //if(btnEvent.noAction) return SDL_APP_CONTINUE;
     if(btnEvent->quit)
     {
@@ -115,8 +116,8 @@ void ShowGameOverMessage(const char *message)
 void ShowGameOverState()
 {
     const char *message = " ";
-    GameResult result = GetGameResult();
-        switch(result.type)
+    GameResult *result = GetGameResult();
+        switch(result->type)
         {
             case X:
                 message = "X Wins!";
@@ -141,8 +142,8 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     SDL_RenderClear(renderer);
     SDL_SetRenderScale(renderer, 1.0f, 1.0f);
 
-    GameResult result = GetGameResult();
-    result.type == NONE ? ShowGameBoard(renderer) : ShowGameOverState();
+    GameResult *result = GetGameResult();
+    result->type == NONE ? ShowGameBoard(renderer) : ShowGameOverState();
 
     // Draw buttons
     RenderButtons(renderer);
