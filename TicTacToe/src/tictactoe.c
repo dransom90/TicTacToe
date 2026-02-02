@@ -15,15 +15,16 @@ static SDL_Renderer *renderer = NULL;
 
 float LOGICAL_W, LOGICAL_H;
 
-SDL_AppResult HandleButtnEventResult(ButtonEvent btnEvent)
+SDL_AppResult HandleButtnEventResult(ButtonEvent *btnEvent)
 {
-    if(btnEvent.noAction) return SDL_APP_CONTINUE;
-    if(btnEvent.quit)
+    //if(btnEvent.noAction) return SDL_APP_CONTINUE;
+    if(btnEvent->quit)
     {
         return SDL_APP_SUCCESS;
     }
-    if(btnEvent.newGame)
+    if(btnEvent->newGame)
     {
+        printf("Calling Reset. ButtonEvent: newGame: %d, quit: %d, noAction: %d\n", btnEvent->newGame, btnEvent->quit, btnEvent->noAction);
         Reset();
         ResetBoard();
         
@@ -63,10 +64,11 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
 /* This function runs when a new event (mouse input, keypresses, etc) occurs. */
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
-{    
+{   ButtonEvent btnEvent = {false, false, false};
     SDL_ConvertEventToRenderCoordinates(renderer, event);
-    ButtonEvent btnEvent = HandleButtonEvent(event);
-    if(HandleButtnEventResult(btnEvent) == SDL_APP_SUCCESS)
+    HandleButtonEvent(event, &btnEvent);
+    //printf("HandleButtonEvent returned ButtonEvent: newGame: %d, quit: %d, noAction: %d\n", btnEvent.newGame, btnEvent.quit, btnEvent.noAction);
+    if(HandleButtnEventResult(&btnEvent) == SDL_APP_SUCCESS)
         return SDL_APP_SUCCESS;
 
     if(event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button == SDL_BUTTON_LEFT)

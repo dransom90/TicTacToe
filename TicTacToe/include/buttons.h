@@ -22,6 +22,6 @@ typedef struct
 
 void CreateButtons(SDL_Window *window);
 void RenderButtons(SDL_Renderer* renderer);
-ButtonEvent HandleButtonEvent(SDL_Event* event);
+void HandleButtonEvent(SDL_Event* event, ButtonEvent *ButtonEvent);
 
 #endif

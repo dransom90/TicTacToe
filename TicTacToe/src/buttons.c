@@ -8,6 +8,10 @@
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
 static Button buttons[2];
 
+void IndicateNewGameAction(ButtonEvent *event);
+void IndicateQuitAction(ButtonEvent *event);
+void IndicateNoAction(ButtonEvent *event);
+
 void CreateButtons(SDL_Window *window)
 {
     // totalWidth = (btnWidth * N) + (btnGap * (N - 1))
@@ -68,16 +72,16 @@ void RenderButtons(SDL_Renderer* renderer)
     }
 }
 
-ButtonEvent HandleButtonEvent(SDL_Event* event)
+void HandleButtonEvent(SDL_Event* event, ButtonEvent *btnEvent)
 {
-    ButtonEvent btnEvent = {false, false, false};
-
     if (event->type == SDL_EVENT_WINDOW_MOUSE_LEAVE || event->type == SDL_EVENT_WINDOW_FOCUS_LOST) {
         for(int i = 0; i < NELEMS(buttons); i++) {
             buttons[i].isHovered = false;
             buttons[i].isPressed = false;
         }
-    }
+        
+        IndicateNoAction(btnEvent);
+    }  
 
     if(event->type == SDL_EVENT_MOUSE_MOTION || event->type == SDL_EVENT_MOUSE_BUTTON_DOWN ||
         event->type == SDL_EVENT_MOUSE_BUTTON_UP)
@@ -112,16 +116,13 @@ ButtonEvent HandleButtonEvent(SDL_Event* event)
                     {
                         if (SDL_strcmp(btn->label, "NEW GAME") == 0)
                         {
-                            printf("New Game press detected\n");
-                            btnEvent.newGame = true;
                             btn->isPressed = false;
-                            return btnEvent;
+                            IndicateNewGameAction(btnEvent);
                         }
                         if (SDL_strcmp(btn->label, "QUIT") == 0)
                         {
-                            btnEvent.quit = true;
                             btn->isPressed = false;
-                            return btnEvent;
+                            IndicateQuitAction(btnEvent);
                         } 
                             
                     }
@@ -130,7 +131,27 @@ ButtonEvent HandleButtonEvent(SDL_Event* event)
                 }
             }
 
-            btnEvent.noAction = true;
-            return btnEvent;
+            IndicateNoAction(btnEvent);
     }
+}
+
+void IndicateNewGameAction(ButtonEvent *event)
+{
+    event->newGame = true;
+    event->quit = false;
+    event-> noAction = false;
+}
+
+void IndicateQuitAction(ButtonEvent *event)
+{
+    event->newGame = false;
+    event->quit = true;
+    event-> noAction = false;
+}
+
+void IndicateNoAction(ButtonEvent *event)
+{
+    event->newGame = false;
+    event->quit = false;
+    event-> noAction = true;
 }
