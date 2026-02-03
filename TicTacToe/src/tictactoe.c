@@ -55,6 +55,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     SDL_SetRenderLogicalPresentation(renderer, (int)LOGICAL_W, (int)LOGICAL_H, SDL_SCALEMODE_LINEAR);
 
+    LoadScoreboard();
     CreateRects(LOGICAL_W, LOGICAL_H);
     CreateButtons(window);
     return SDL_APP_CONTINUE;

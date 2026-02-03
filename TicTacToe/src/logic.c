@@ -74,4 +74,5 @@ void UpdateScoreboard()
 
     AddResult(result);
     scoreboardUpdated = true;
+    SaveScoreboard();
 }

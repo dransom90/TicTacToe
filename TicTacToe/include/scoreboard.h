@@ -7,5 +7,7 @@ int GetXWins();
 int GetOWins();
 int GetTies();
 void AddResult(GameResult result);
+int SaveScoreboard();
+int LoadScoreboard();
 
 #endif
