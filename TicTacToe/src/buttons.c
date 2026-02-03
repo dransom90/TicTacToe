@@ -116,7 +116,6 @@ void HandleButtonEvent(SDL_Event* event, ButtonEvent *btnEvent)
                     {
                         if (SDL_strcmp(btn->label, "NEW GAME") == 0)
                         {
-                            printf("Setting btnEvent to new game\n");
                             btn->isPressed = false;
                             IndicateNewGameAction(btnEvent);
                             return;

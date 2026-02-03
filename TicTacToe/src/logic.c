@@ -59,7 +59,7 @@ void Reset()
     //printf("Resetting logic\n");
     turn = 0;
     result.type = NONE;
-    scoreboardUpdated = true;
+    scoreboardUpdated = false;
 }
 
 GameResult* GetGameResult(void)
@@ -69,11 +69,9 @@ GameResult* GetGameResult(void)
 
 void UpdateScoreboard()
 {
-    //printf("Entering UpdateScoreboard\n");
     if(result.type == NONE || scoreboardUpdated)
         return;
 
-    //printf("Calling AddResult\n");
     AddResult(result);
     scoreboardUpdated = true;
 }

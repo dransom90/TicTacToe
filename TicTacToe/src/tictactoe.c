@@ -17,15 +17,12 @@ float LOGICAL_W, LOGICAL_H;
 
 SDL_AppResult HandleButtnEventResult(ButtonEvent *btnEvent)
 {
-    //printf("HandleButtonEventResult: newGame: %d, quit: %d, noAction: %d\n", btnEvent->newGame, btnEvent->quit, btnEvent->noAction);
-    //if(btnEvent.noAction) return SDL_APP_CONTINUE;
     if(btnEvent->quit)
     {
         return SDL_APP_SUCCESS;
     }
     if(btnEvent->newGame)
     {
-        printf("Calling Reset. ButtonEvent: newGame: %d, quit: %d, noAction: %d\n", btnEvent->newGame, btnEvent->quit, btnEvent->noAction);
         Reset();
         ResetBoard();
         
@@ -68,7 +65,7 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {   ButtonEvent btnEvent = {false, false, false};
     SDL_ConvertEventToRenderCoordinates(renderer, event);
     HandleButtonEvent(event, &btnEvent);
-    //printf("HandleButtonEvent returned ButtonEvent: newGame: %d, quit: %d, noAction: %d\n", btnEvent.newGame, btnEvent.quit, btnEvent.noAction);
+    
     if(HandleButtnEventResult(&btnEvent) == SDL_APP_SUCCESS)
         return SDL_APP_SUCCESS;
 
@@ -135,6 +132,37 @@ void ShowGameOverState()
     ShowGameOverMessage(message);
 }
 
+void ShowScoreboard()
+{
+    int w = 0, h = 0;
+    float scale = 4.0f;
+    char scores[100];
+    char *title = "SCOREBOARD";
+
+    /* Center the message and scale it up */
+    SDL_GetRenderOutputSize(renderer, &w, &h);
+    SDL_SetRenderScale(renderer, scale, scale);
+    int x = ((w / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(title)) / 8;
+    int y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 3;
+
+    /* Draw the title */
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderDebugText(renderer, x, y, title);
+    SDL_RenderLine(renderer, x, y + 8.0f, x + SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(title), y + 8.0f);
+    
+    // Draw the scores
+    scale = 2.0f;
+    SDL_SetRenderScale(renderer, scale, scale);
+    snprintf(scores, sizeof(scores), "X: %d\nO: %d\nTies: %d", GetXWins(), GetOWins(), GetTies());
+    
+    x = ((w / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE * SDL_strlen(title)) / 8;
+    y = ((h / scale) - SDL_DEBUG_TEXT_FONT_CHARACTER_SIZE) / 3;
+    SDL_RenderDebugText(renderer, x, y + 24.0f, scores);
+    
+    // Restore render scale to 1 before returning to the main loop.
+    SDL_SetRenderScale(renderer, 1.0f, 1.0f);
+}
+
 /* This function runs once per frame, and is the heart of the program. */
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
@@ -144,10 +172,13 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     GameResult *result = GetGameResult();
     result->type == NONE ? ShowGameBoard(renderer) : ShowGameOverState();
+    
+    ShowScoreboard();
 
     // Draw buttons
     RenderButtons(renderer);
     SDL_RenderPresent(renderer);
+
     
     return SDL_APP_CONTINUE;
 }

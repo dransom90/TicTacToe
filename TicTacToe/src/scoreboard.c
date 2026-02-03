@@ -37,8 +37,6 @@ void AddResult(GameResult result)
         default:
             break;
     }
-
-    printf("Result added to scoreboard:\tX: %d\tO: %d\tTies: %d\n", xWins, oWins, ties);
 }
 
 //TODO: Add saving/loading ability
