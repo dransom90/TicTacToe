@@ -23,5 +23,6 @@ typedef struct
 void CreateButtons(SDL_Window *window);
 void RenderButtons(SDL_Renderer* renderer);
 void HandleButtonEvent(SDL_Event* event, ButtonEvent *ButtonEvent);
+bool GetShouldShowGameOverMessage();
 
 #endif

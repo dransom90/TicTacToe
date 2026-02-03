@@ -130,7 +130,10 @@ void ShowGameOverState()
                 break;
         }
     
-    ShowGameOverMessage(message);
+    if(GetShouldShowGameOverMessage())
+        ShowGameOverMessage(message);
+    else
+        ShowGameBoard(renderer);
 }
 
 void ShowScoreboard()

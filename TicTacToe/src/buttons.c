@@ -6,11 +6,13 @@
 #include <buttons.h>
 
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
-static Button buttons[2];
+static Button buttons[3];
+static bool shouldShowGameOverMessage = true;
 
 void IndicateNewGameAction(ButtonEvent *event);
 void IndicateQuitAction(ButtonEvent *event);
 void IndicateNoAction(ButtonEvent *event);
+void HandleShowBoardClick();
 
 void CreateButtons(SDL_Window *window)
 {
@@ -34,6 +36,9 @@ void CreateButtons(SDL_Window *window)
     // Quit
     Button quit = {{0,0,btnWidth, btnHeight}, {0,0,0,0}, false, false, "QUIT"};
     buttons[1] = quit;
+
+    Button showBoard = { {0, 0, btnWidth, btnHeight}, {0,0,0,0}, false, false, "SHOW BOARD"};
+    buttons[2] = showBoard;
 
     for(int i = 0; i < btnCount; i++)
     {
@@ -125,6 +130,13 @@ void HandleButtonEvent(SDL_Event* event, ButtonEvent *btnEvent)
                             btn->isPressed = false;
                             IndicateQuitAction(btnEvent);
                             return;
+                        }
+                        if(SDL_strcmp(btn->label, "SHOW BOARD") == 0)
+                        {
+                            btn->isPressed = false;
+                            IndicateNoAction(btnEvent);
+                            HandleShowBoardClick();
+                            return;
                         }   
                     }
 
@@ -155,4 +167,14 @@ void IndicateNoAction(ButtonEvent *event)
     event->newGame = false;
     event->quit = false;
     event-> noAction = true;
+}
+
+bool GetShouldShowGameOverMessage()
+{
+    return shouldShowGameOverMessage;
+}
+
+void HandleShowBoardClick()
+{
+    shouldShowGameOverMessage = !shouldShowGameOverMessage;
 }
