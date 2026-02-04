@@ -7,12 +7,23 @@
 int turn = 0;
 static GameResult result = { NONE };
 bool scoreboardUpdated = false;
+static bool isTwoPlayerMode = true;
 
 const int WIN_STATES[8][3] = {
     {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Rows
     {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Columns
     {0, 4, 8}, {2, 4, 6}             // Diagonals
 };
+
+bool GetIsTwoPlayerMode()
+{
+    return isTwoPlayerMode;
+}
+
+void SetIsTwoPlayerMode(bool mode)
+{
+    isTwoPlayerMode = mode;
+}
 
 int CheckForTie()
 {
@@ -75,4 +86,17 @@ void UpdateScoreboard()
     AddResult(result);
     scoreboardUpdated = true;
     SaveScoreboard();
+}
+
+void PlacePlayer2Marker()
+{
+    //TODO: Add difficulty levels/strategy
+    for(int i = 0; i < 9; i++)
+    {
+        if(markers[i] == 0)
+        {
+            markers[i] = 2;
+            return;
+        }
+    }
 }

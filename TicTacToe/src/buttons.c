@@ -4,9 +4,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <buttons.h>
+#include <logic.h>
 
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
-static Button buttons[3];
+static Button buttons[4];
 static bool shouldShowGameOverMessage = true;
 
 void IndicateNewGameAction(ButtonEvent *event);
@@ -37,8 +38,12 @@ void CreateButtons(SDL_Window *window)
     Button quit = {{0,0,btnWidth, btnHeight}, {0,0,0,0}, false, false, "QUIT"};
     buttons[1] = quit;
 
+    // Show Board
     Button showBoard = { {0, 0, btnWidth, btnHeight}, {0,0,0,0}, false, false, "SHOW BOARD"};
     buttons[2] = showBoard;
+
+    Button mode = { {0, 0, btnWidth, btnHeight}, {0,0,0,0}, false, false, "SINGLE PLAYER"};
+    buttons[3] = mode;
 
     for(int i = 0; i < btnCount; i++)
     {
@@ -137,7 +142,23 @@ void HandleButtonEvent(SDL_Event* event, ButtonEvent *btnEvent)
                             IndicateNoAction(btnEvent);
                             HandleShowBoardClick();
                             return;
-                        }   
+                        }
+                        if(SDL_strcmp(btn->label, "SINGLE PLAYER") == 0)
+                        {
+                            btn->isPressed = false;
+                            IndicateNewGameAction(btnEvent);
+                            btn->label = "2 PLAYERS";
+                            SetIsTwoPlayerMode(false);
+                            return;
+                        }
+                        if(SDL_strcmp(btn->label, "2 PLAYERS") == 0)
+                        {
+                            btn->isPressed = false;
+                            IndicateNewGameAction(btnEvent);
+                            btn->label = "SINGLE PLAYER";
+                            SetIsTwoPlayerMode(true);
+                            return;
+                        }
                     }
 
                     btn->isPressed = false;

@@ -1,6 +1,7 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
+#include <stdbool.h>
 extern int winner;
 extern int turn;
 
@@ -22,5 +23,8 @@ void EndCurrentTurn();
 void Reset();
 GameResult* GetGameResult();
 void UpdateScoreboard();
+bool GetIsTwoPlayerMode();
+void PlacePlayer2Marker();
+void SetIsTwoPlayerMode(bool mode);
 
 #endif

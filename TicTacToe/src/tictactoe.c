@@ -72,20 +72,21 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 
     if(event->type == SDL_EVENT_MOUSE_BUTTON_DOWN && event->button.button == SDL_BUTTON_LEFT)
     {
-        SDL_FPoint mousePoint = { event->button.x, (int)event->button.y};
-        for(int i = 0; i < 9; i++)
+        bool mode = GetIsTwoPlayerMode();
+        if(GetIsTwoPlayerMode() || (!GetIsTwoPlayerMode() && turn == 0))
         {
-            if(SDL_PointInRectFloat(&mousePoint, &rects[i]))
+            SDL_FPoint mousePoint = { event->button.x, (int)event->button.y};
+            for(int i = 0; i < 9; i++)
             {
-                int marker = turn == 0 ? 1 : 2;
-                bool success = AddMarker(i, marker);
-                if(success)
-                    EndCurrentTurn();
+                if(SDL_PointInRectFloat(&mousePoint, &rects[i]))
+                {
+                    int marker = turn == 0 ? 1 : 2;
+                    bool success = AddMarker(i, marker);
+                    if(success)
+                        EndCurrentTurn();
+                }
             }
         }
-
-        CheckForWinner();
-        UpdateScoreboard();
     }
 
      if (event->type == SDL_EVENT_QUIT) {
@@ -183,7 +184,15 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     RenderButtons(renderer);
     SDL_RenderPresent(renderer);
 
-    
+    if(!GetIsTwoPlayerMode() && turn == 1)
+    {
+        PlacePlayer2Marker();
+        EndCurrentTurn();
+    }
+
+    CheckForWinner();
+    UpdateScoreboard();
+
     return SDL_APP_CONTINUE;
 }
 

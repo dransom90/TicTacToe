@@ -168,8 +168,13 @@ void ResetBoard()
     memset(markers, 0, sizeof(markers));
 }
 
-void AddMarker(int space, int marker)
+bool AddMarker(int space, int marker)
 {
     if((space >= 0 && space < 9) && markers[space] == 0)
+    {
         markers[space] = marker;
+        return true;
+    }
+
+    return false;
 }
