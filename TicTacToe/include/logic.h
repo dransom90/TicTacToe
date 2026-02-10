@@ -26,5 +26,6 @@ void UpdateScoreboard();
 bool GetIsTwoPlayerMode();
 void PlacePlayer2Marker();
 void SetIsTwoPlayerMode(bool mode);
+void SetAiLevel();
 
 #endif

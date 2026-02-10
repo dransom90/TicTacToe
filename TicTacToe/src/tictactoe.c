@@ -176,19 +176,27 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     SDL_SetRenderScale(renderer, 1.0f, 1.0f);
 
     GameResult *result = GetGameResult();
-    result->type == NONE ? ShowGameBoard(renderer) : ShowGameOverState();
+
+    if(result->type == NONE)
+    {
+        ShowGameBoard(renderer);
+        if(!GetIsTwoPlayerMode() && turn == 1)
+        {
+            PlacePlayer2Marker();
+            EndCurrentTurn();
+        }
+    }
+    else
+    {
+        ShowGameOverState();
+    }
+    //result->type == NONE ? ShowGameBoard(renderer) : ShowGameOverState();
     
     ShowScoreboard();
 
     // Draw buttons
     RenderButtons(renderer);
     SDL_RenderPresent(renderer);
-
-    if(!GetIsTwoPlayerMode() && turn == 1)
-    {
-        PlacePlayer2Marker();
-        EndCurrentTurn();
-    }
 
     CheckForWinner();
     UpdateScoreboard();

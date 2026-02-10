@@ -7,7 +7,7 @@
 #include <logic.h>
 
 #define NELEMS(x) (sizeof(x) / sizeof((x)[0]))
-static Button buttons[4];
+static Button buttons[5];
 static bool shouldShowGameOverMessage = true;
 
 void IndicateNewGameAction(ButtonEvent *event);
@@ -44,6 +44,9 @@ void CreateButtons(SDL_Window *window)
 
     Button mode = { {0, 0, btnWidth, btnHeight}, {0,0,0,0}, false, false, "SINGLE PLAYER"};
     buttons[3] = mode;
+
+    Button level = { {0, 0, btnWidth, btnHeight}, {0,0,0,0}, false, false, "EASY"};
+    buttons[4] = level;
 
     for(int i = 0; i < btnCount; i++)
     {
@@ -157,6 +160,33 @@ void HandleButtonEvent(SDL_Event* event, ButtonEvent *btnEvent)
                             IndicateNewGameAction(btnEvent);
                             btn->label = "SINGLE PLAYER";
                             SetIsTwoPlayerMode(true);
+                            return;
+                        }
+                        if(SDL_strcmp(btn->label, "EASY") == 0)
+                        {
+                            btn->isPressed = false;
+                            IndicateNewGameAction(btnEvent);
+                            btn->label = "MEDIUM";
+                            SetIsTwoPlayerMode(false);
+                            SetAiLevel();
+                            return;
+                        }
+                        if(SDL_strcmp(btn->label, "MEDIUM") == 0)
+                        {
+                            btn->isPressed = false;
+                            IndicateNewGameAction(btnEvent);
+                            btn->label = "HARD";
+                            SetIsTwoPlayerMode(false);
+                            SetAiLevel();
+                            return;
+                        }
+                        if(SDL_strcmp(btn->label, "HARD") == 0)
+                        {
+                            btn->isPressed = false;
+                            IndicateNewGameAction(btnEvent);
+                            btn->label = "EASY";
+                            SetIsTwoPlayerMode(false);
+                            SetAiLevel();
                             return;
                         }
                     }

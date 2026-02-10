@@ -62,7 +62,7 @@ int LoadScoreboard()
 
     if(fscanf(fptr, "%d %d %d", &xWins, &oWins, &ties) == 3)
     {
-        printf("Loaded scores\n");
+        //printf("Loaded scores\n");
     }
 
     fclose(fptr);
