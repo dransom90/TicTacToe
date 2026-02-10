@@ -301,7 +301,6 @@ void PerformLevel2Move()
 // AI analyzes board and finds best move.
 void PerformLevel3Move()
 {
-    printf("Finding best move\n");
     int bestMove = FindBestMove(markers);
     markers[bestMove] = 2;
 }

@@ -84,6 +84,8 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
                     bool success = AddMarker(i, marker);
                     if(success)
                         EndCurrentTurn();
+
+                    CheckForWinner();
                 }
             }
         }
@@ -184,22 +186,20 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         {
             PlacePlayer2Marker();
             EndCurrentTurn();
+            CheckForWinner();
         }
     }
     else
     {
         ShowGameOverState();
+        UpdateScoreboard();
     }
-    //result->type == NONE ? ShowGameBoard(renderer) : ShowGameOverState();
     
     ShowScoreboard();
 
     // Draw buttons
     RenderButtons(renderer);
     SDL_RenderPresent(renderer);
-
-    CheckForWinner();
-    UpdateScoreboard();
 
     return SDL_APP_CONTINUE;
 }
